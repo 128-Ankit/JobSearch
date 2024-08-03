@@ -133,9 +133,17 @@ const login = async (req, res) => {
 // Logout User
 const logout = async (req, res) => {
     try {
-
+        //for logout remove token from cookies
+        return res.cookie("token", "", {maxAge: 0}).json({
+            message: "Logged out successfully.",
+            success: true
+        })
     } catch (error) {
-
+        console.log(error)
+        res.status(400).json({
+            success:false,
+            message:"Logout failed try again!"
+        });
     }
 }
 
